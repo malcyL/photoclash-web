@@ -16,7 +16,7 @@ export class GetCompetitions implements Action {
 
 export class GetCompetitionsSuccess implements Action {
   public readonly type = ECompetitionActions.GetCompetitionsSuccess;
-  public payload: any;
+  constructor(public payload: ICompetition[]) {}
 }
 
 export class GetCompetition implements Action {
@@ -26,7 +26,7 @@ export class GetCompetition implements Action {
 
 export class GetCompetitionSuccess implements Action {
   public readonly type = ECompetitionActions.GetCompetitionSuccess;
-  public payload: any;
+  constructor(public payload: ICompetition) {}
 }
 
 export type CompetitionActions = GetCompetitions | GetCompetitionsSuccess | GetCompetition | GetCompetitionSuccess;

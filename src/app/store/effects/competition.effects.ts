@@ -13,9 +13,9 @@ import {
   GetCompetitions,
   GetCompetition
 } from '../actions/competition.actions';
-import { CompetitionService } from '../services/competition.service';
-import { ICompetitionHttp } from '../../http-models/competition-http.interface';
-import { selectCompetitionList } from '../selectors/competition.selector';
+import { CompetitionService } from '../../services/competition.service';
+import { ICompetitionHttp } from '../../models/http-models/competition-http.interface';
+import { selectCompetitionList } from '../selectors/competition.selectors';
 
 @Injectable()
 export class CompetitionEffects {
@@ -23,9 +23,9 @@ export class CompetitionEffects {
   getCompetition$ = this._actions$.pipe(
     ofType<GetCompetition>(ECompetitionActions.GetCompetition),
     map(action => action.payload),
-    withLatestFrom(this.store.pipe(select(selectCompetitionList))),
+    withLatestFrom(this._store.pipe(select(selectCompetitionList))),
     switchMap(([id, competitions]) => {
-      const selectedCompetition = competitions.filter(competition => competition.id === +id)[0];
+      const selectedCompetition = competitions.filter(competition => competition.id === id)[0];
       return of(new GetCompetitionSuccess(selectedCompetition));
     })
   );
@@ -34,7 +34,7 @@ export class CompetitionEffects {
   getCompetitions$ = this._actions$.pipe(
     ofType<GetCompetitions>(ECompetitionActions.GetCompetitions),
     switchMap(() => this._competitionService.getCompetitions()),
-    swicthMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions)))
+    switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions)))
   );
 
   constructor(
