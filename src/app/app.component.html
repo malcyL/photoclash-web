@@ -11,7 +11,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-toolbar color='secondary'>
+  <mat-toolbar color='primary'>
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon aria-hidden="false" aria-label="Menu">menu</mat-icon>
     </button>
@@ -21,6 +21,12 @@
       <mat-icon aria-hidden="false" aria-label="More Menu">more_vert</mat-icon>
     </button>
   </mat-toolbar>
+
+  <!-- {{ (competitionList$ | async)?[0].title }} -->
+  <!-- {{ (competitionList$ | async) }} -->
+
+  <app-competition-list [competitions]="competitionList$ | async" (competitionSelected)=navigateToCompetition($event)>
+  </app-competition-list>
 
   <div class="main-div">
     <router-outlet></router-outlet>
