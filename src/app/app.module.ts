@@ -25,6 +25,7 @@ import { CompetitionEffects } from './store/effects/competition.effects';
 import { CompetitionService } from './services/competition.service';
 import { CompetitionListComponent as CompetitionListContainerComponent } from './container/competition-list/competition-list.component';
 import { CompetitionListComponent } from './components/competition-list/competition-list.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 
 
@@ -32,7 +33,8 @@ import { CompetitionListComponent } from './components/competition-list/competit
   declarations: [
     AppComponent,
     CompetitionListContainerComponent,
-    CompetitionListComponent
+    CompetitionListComponent,
+    CompetitionsComponent
   ],
   imports: [
     BrowserModule,
