@@ -16,7 +16,10 @@ export class GetCompetitions implements Action {
 
 export class GetCompetitionsSuccess implements Action {
   public readonly type = ECompetitionActions.GetCompetitionsSuccess;
-  constructor(public payload: ICompetition[]) {}
+  constructor(public payload: ICompetition[]) {
+console.log('HERE');
+console.log('payload: ' + JSON.stringify(this.payload));
+  }
 }
 
 export class GetCompetition implements Action {
@@ -26,7 +29,7 @@ export class GetCompetition implements Action {
 
 export class GetCompetitionSuccess implements Action {
   public readonly type = ECompetitionActions.GetCompetitionSuccess;
-  constructor(public payload: ICompetition) {}
+  constructor(public payload: ICompetition) { }
 }
 
 export type CompetitionActions = GetCompetitions | GetCompetitionsSuccess | GetCompetition | GetCompetitionSuccess;

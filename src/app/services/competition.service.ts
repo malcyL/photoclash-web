@@ -7,11 +7,13 @@ import { ICompetitionHttp } from '../models/http-models/competition-http.interfa
 
 @Injectable()
 export class CompetitionService {
-  competitonsUrl = `${environment.apiUrl}competitions.json`;
+  competitonsUrl = `${environment.apiUrl}competitions`;
 
   constructor(private http: HttpClient) { }
 
   getCompetitions(): Observable<ICompetitionHttp> {
-    return this.http.get<ICompetitionHttp>(this.competitonsUrl);
+    const result = this.http.get<ICompetitionHttp>(this.competitonsUrl);
+    return result;
+    // return this.http.get<ICompetitionHttp>(this.competitonsUrl);
   }
 }

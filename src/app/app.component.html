@@ -22,12 +22,6 @@
     </button>
   </mat-toolbar>
 
-  <!-- {{ (competitionList$ | async)?[0].title }} -->
-  <!-- {{ (competitionList$ | async) }} -->
-
-  <app-competition-list [competitions]="competitionList$ | async" (competitionSelected)=navigateToCompetition($event)>
-  </app-competition-list>
-
   <div class="main-div">
     <router-outlet></router-outlet>
   </div>

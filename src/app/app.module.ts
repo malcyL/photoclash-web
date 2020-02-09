@@ -23,10 +23,16 @@ import { environment } from '../environments/environment';
 
 import { CompetitionEffects } from './store/effects/competition.effects';
 import { CompetitionService } from './services/competition.service';
+import { CompetitionListComponent as CompetitionListContainerComponent } from './container/competition-list/competition-list.component';
+import { CompetitionListComponent } from './components/competition-list/competition-list.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CompetitionListContainerComponent,
+    CompetitionListComponent
   ],
   imports: [
     BrowserModule,

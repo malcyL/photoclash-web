@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 import { IAppState } from '../state/app.state';
 
@@ -20,10 +20,10 @@ import { selectCompetitionList } from '../selectors/competition.selectors';
 @Injectable()
 export class CompetitionEffects {
   @Effect()
-  getCompetition$ = this._actions$.pipe(
+  getCompetition$ = this.actions$.pipe(
     ofType<GetCompetition>(ECompetitionActions.GetCompetition),
     map(action => action.payload),
-    withLatestFrom(this._store.pipe(select(selectCompetitionList))),
+    withLatestFrom(this.store.pipe(select(selectCompetitionList))),
     switchMap(([id, competitions]) => {
       const selectedCompetition = competitions.filter(competition => competition.id === id)[0];
       return of(new GetCompetitionSuccess(selectedCompetition));
@@ -31,16 +31,30 @@ export class CompetitionEffects {
   );
 
   @Effect()
-  getCompetitions$ = this._actions$.pipe(
+  getCompetitions$ = this.actions$.pipe(
     ofType<GetCompetitions>(ECompetitionActions.GetCompetitions),
-    switchMap(() => this._competitionService.getCompetitions()),
+    switchMap(() => this.competitionService.getCompetitions()),
     switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions)))
+    // mergeMap(() =>
+    //   this.competitionService.getCompetitions().pipe(
+    //     map((competitionsJson: ICompetitionHttp) => new GetCompetitionsSuccess(competitionsJson.competitions)),
+    //     // catchError(error => of(LoginJsonActions.loginFailed({ error }))),
+    //   ),
+    // )
+    // mergeMap(() =>
+    //   this.competitionService.getCompetitions().pipe(
+    //     map((competitionsJson: ICompetitionHttp) => {
+    //       return new GetCompetitionsSuccess(competitionsJson.competitions);
+    //     }),
+    //     // catchError(error => of(LoginJsonActions.loginFailed({ error }))),
+    //   ),
+    // )
   );
 
   constructor(
-    private _competitionService: CompetitionService,
-    private _actions$: Actions,
-    private _store: Store<IAppState>
+    private competitionService: CompetitionService,
+    private actions$: Actions,
+    private store: Store<IAppState>
   ) {}
 }
 
