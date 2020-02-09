@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CompetitionListComponent } from './container/competition-list/competition-list.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 const routes: Routes = [
   { path: 'competitions', component: CompetitionsComponent },

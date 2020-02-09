@@ -23,8 +23,6 @@ import { environment } from '../environments/environment';
 
 import { CompetitionEffects } from './store/effects/competition.effects';
 import { CompetitionService } from './services/competition.service';
-import { CompetitionListComponent as CompetitionListContainerComponent } from './container/competition-list/competition-list.component';
-import { CompetitionListComponent } from './components/competition-list/competition-list.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 
@@ -32,8 +30,6 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
 @NgModule({
   declarations: [
     AppComponent,
-    CompetitionListContainerComponent,
-    CompetitionListComponent,
     CompetitionsComponent
   ],
   imports: [
