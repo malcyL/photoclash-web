@@ -17,8 +17,6 @@ export class GetCompetitions implements Action {
 export class GetCompetitionsSuccess implements Action {
   public readonly type = ECompetitionActions.GetCompetitionsSuccess;
   constructor(public payload: ICompetition[]) {
-console.log('HERE');
-console.log('payload: ' + JSON.stringify(this.payload));
   }
 }
 
