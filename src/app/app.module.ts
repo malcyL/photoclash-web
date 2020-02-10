@@ -24,13 +24,15 @@ import { environment } from '../environments/environment';
 import { CompetitionEffects } from './store/effects/competition.effects';
 import { CompetitionService } from './services/competition.service';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CompetitionsComponent
+    CompetitionsComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
