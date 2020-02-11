@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AngularTokenModule } from 'angular-token';
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +47,7 @@ import { MatTooltipModule } from '@angular/material';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,

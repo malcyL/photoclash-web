@@ -10,7 +10,7 @@
 
     <mat-card-content>   
       <form #signInForm="ngForm" (ngSubmit)="onSubmit()">
-        <mat-form-field> 
+        <mat-form-field fxLayout.gt-xs="row" fxLayout.xs="column"> 
           <input         
             matInput     
             type="email" 
@@ -20,7 +20,7 @@
             name="email">
         </mat-form-field>
         
-        <mat-form-field>
+        <mat-form-field fxLayout.gt-xs="row" fxLayout.xs="column">
           <input 
             matInput
             type="password"
