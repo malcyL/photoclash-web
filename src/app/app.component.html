@@ -15,11 +15,17 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon aria-hidden="false" aria-label="Menu">menu</mat-icon>
     </button>
+
     <span class="toolbar-title">Photo Clash</span>
+
     <span class="fill-space"></span>
-    <button class="submit-btn" mat-icon-button>
-      <mat-icon aria-hidden="false" aria-label="More Menu">more_vert</mat-icon>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <app-logout-menu-button></app-logout-menu-button>
+    </mat-menu>
   </mat-toolbar>
 
   <div class="main-div">

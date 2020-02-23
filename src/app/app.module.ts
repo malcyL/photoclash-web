@@ -32,16 +32,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material';
+import { LogoutMenuButtonComponent } from './components/auth/logout-menu-button/logout-menu-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompetitionsComponent,
     AuthComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutMenuButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { MatTooltipModule } from '@angular/material';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,

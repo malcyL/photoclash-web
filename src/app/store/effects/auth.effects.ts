@@ -11,7 +11,10 @@ import {
   EAuthActions,
   Login,
   LoginSuccess,
-  LoginError
+  LoginError,
+  Logout,
+  LogoutSuccess,
+  LogoutError,
 } from '../actions/auth.actions';
 import { AngularTokenService } from 'angular-token';
 import { ICompetitionHttp } from '../../models/http-models/competition-http.interface';
@@ -32,14 +35,17 @@ export class AuthEffects {
     )
   );
 
-  // @Effect()
-  // login$ = this.actions$.pipe(
-  //   ofType<Login>(EAuthActions.Login),
-  //   switchMap((loginAction) => this.angularTokenService.signIn(loginAction.payload)),
-  //   switchMap((response: any) => of (new LoginSuccess(response)))
-  // );
-
-
+  @Effect()
+  logout = this.actions$.pipe(
+    ofType<Logout>(EAuthActions.Logout),
+    mergeMap((logoutAction) =>
+      this.angularTokenService.signOut().pipe(
+        map(response => new LogoutSuccess()),
+        tap(() => this.router.navigate(['/'])),
+        catchError(error => of (new LogoutError()))
+      )
+    )
+  );
 
   constructor(
     private angularTokenService: AngularTokenService,
