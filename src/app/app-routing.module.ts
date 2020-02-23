@@ -5,9 +5,9 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
 import { AngularTokenService } from 'angular-token';
 
 const routes: Routes = [
-  { path: 'login', component: AuthComponent },
+  { path: '', redirectTo: '/competitions', pathMatch: 'full' },
   { path: 'competitions', component: CompetitionsComponent, canActivate: [AngularTokenService] },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: 'login', component: AuthComponent },
 ];
 
 

@@ -29,7 +29,7 @@ export class AuthEffects {
     mergeMap((loginAction) =>
       this.angularTokenService.signIn(loginAction.payload).pipe(
         map(response => new LoginSuccess(response)),
-        tap(() => this.router.navigate(['/competitions'])),
+        tap(() => this.router.navigateByUrl(localStorage.getItem('redirectTo'))),
         catchError(error => of (new LoginError()))
       )
     )
@@ -41,7 +41,7 @@ export class AuthEffects {
     mergeMap((logoutAction) =>
       this.angularTokenService.signOut().pipe(
         map(response => new LogoutSuccess()),
-        tap(() => this.router.navigate(['/'])),
+        tap(() => this.router.navigate(['/login'])),
         catchError(error => of (new LogoutError()))
       )
     )

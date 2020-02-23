@@ -64,8 +64,9 @@ import { LogoutMenuButtonComponent } from './components/auth/logout-menu-button/
     MatToolbarModule,
     MatTooltipModule,
     AngularTokenModule.forRoot({
-      apiBase: 'api'
-      // ...
+      apiBase: 'api',
+      signInStoredUrlStorageKey: 'originalUrl',
+      signInRedirect: '/login',
     }),
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([AuthEffects, CompetitionEffects]),
