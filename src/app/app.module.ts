@@ -60,7 +60,7 @@ import { MatTooltipModule } from '@angular/material';
     MatToolbarModule,
     MatTooltipModule,
     AngularTokenModule.forRoot({
-      apiBase: 'http://localhost:3000'
+      apiBase: 'api'
       // ...
     }),
     StoreModule.forRoot(appReducers),

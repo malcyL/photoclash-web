@@ -4,6 +4,7 @@ import { SignInData } from 'angular-token';
 export enum EAuthActions {
   Login = '[Auth] Login',
   LoginSuccess = '[Auth] Login Success',
+  LoginError = '[Auth] Login Error',
 }
 
 export class Login implements Action {
@@ -17,4 +18,10 @@ export class LoginSuccess implements Action {
 constructor(public payload: any) {}
 }
 
-export type AuthActions = Login | LoginSuccess;
+export class LoginError implements Action {
+  public readonly type = EAuthActions.LoginError;
+  // constructor(public payload: ICompetition[]) {}
+constructor() {}
+}
+
+export type AuthActions = Login | LoginSuccess | LoginError;
