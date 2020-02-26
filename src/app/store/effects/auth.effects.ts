@@ -12,6 +12,9 @@ import {
   Login,
   LoginSuccess,
   LoginError,
+  OAuthLogin,
+  OAuthLoginSuccess,
+  OAuthLoginError,
   Logout,
   LogoutSuccess,
   LogoutError,
@@ -30,6 +33,18 @@ export class AuthEffects {
       this.angularTokenService.signIn(loginAction.payload).pipe(
         map(response => new LoginSuccess(response)),
         tap(() => this.router.navigateByUrl(localStorage.getItem('redirectTo'))),
+        catchError(error => of (new LoginError()))
+      )
+    )
+  );
+
+  @Effect()
+  oauthLogin$ = this.actions$.pipe(
+    ofType<OAuthLogin>(EAuthActions.OAuthLogin),
+    mergeMap((oauthLoginAction) =>
+      this.angularTokenService.signInOAuth('google_oauth2').pipe(
+        map(response => console.log(response)),
+        // catchError(error => of (console.log(error)))
         catchError(error => of (new LoginError()))
       )
     )

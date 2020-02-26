@@ -37,6 +37,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material';
 import { LogoutMenuButtonComponent } from './components/auth/logout-menu-button/logout-menu-button.component';
+import { OauthCallbackComponent } from './components/auth/oauth-callback/oauth-callback.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { LogoutMenuButtonComponent } from './components/auth/logout-menu-button/
     CompetitionsComponent,
     AuthComponent,
     LoginComponent,
-    LogoutMenuButtonComponent
+    LogoutMenuButtonComponent,
+    OauthCallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,9 @@ import { LogoutMenuButtonComponent } from './components/auth/logout-menu-button/
       apiBase: 'api',
       signInStoredUrlStorageKey: 'originalUrl',
       signInRedirect: '/login',
+      oAuthBase: '/api',
+      oAuthWindowType: 'sameWindow',
+      // oAuthCallbackPath: 'competitions',
     }),
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([AuthEffects, CompetitionEffects]),

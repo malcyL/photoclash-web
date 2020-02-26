@@ -4,7 +4,7 @@ import { SignInData } from 'angular-token';
 import { Store } from '@ngrx/store';
 
 import { IAppState } from '../../../store/state/app.state';
-import { Login } from './../../../store/actions/auth.actions';
+import { Login, OAuthLogin } from './../../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -24,5 +24,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.store.dispatch(new Login(this.signInData));
+  }
+
+  googleLogin() {
+    this.store.dispatch(new OAuthLogin());
   }
 }
