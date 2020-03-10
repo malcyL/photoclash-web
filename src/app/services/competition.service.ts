@@ -12,8 +12,6 @@ export class CompetitionService {
   constructor(private http: HttpClient) { }
 
   getCompetitions(): Observable<ICompetitionHttp> {
-    const result = this.http.get<ICompetitionHttp>(this.competitonsUrl);
-    return result;
-    // return this.http.get<ICompetitionHttp>(this.competitonsUrl);
+    return this.http.get<ICompetitionHttp>(this.competitonsUrl);
   }
 }

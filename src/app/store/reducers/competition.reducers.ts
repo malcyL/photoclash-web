@@ -2,10 +2,10 @@ import { ECompetitionActions } from '../actions/competition.actions';
 import { CompetitionActions } from '../actions/competition.actions';
 import { initialCompetitionState, ICompetitionState } from '../state/competition.state';
 
-export const competitionReducers = (
+export function competitionReducers(
   state = initialCompetitionState,
   action: CompetitionActions
-): ICompetitionState => {
+): ICompetitionState {
   switch (action.type) {
     case ECompetitionActions.GetCompetitionsSuccess: {
       return {
@@ -23,5 +23,5 @@ export const competitionReducers = (
     default:
       return state;
   }
-};
+}
 

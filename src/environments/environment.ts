@@ -4,8 +4,11 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://photoclash-api.herokuapp.com/api/'
-  // apiUrl: 'http://localhost:3000/api/'
+  apiUrl: 'http://localhost:3000/api/',
+  angularToken: {
+    apiBase: 'http://localhost:3000/api',
+    oauthBase: 'http://localhost:3000/api',
+  }
 };
 
 /*
