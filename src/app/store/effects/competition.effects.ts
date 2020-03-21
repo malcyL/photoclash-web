@@ -35,20 +35,6 @@ export class CompetitionEffects {
     ofType<GetCompetitions>(ECompetitionActions.GetCompetitions),
     switchMap(() => this.competitionService.getCompetitions()),
     switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions)))
-    // mergeMap(() =>
-    //   this.competitionService.getCompetitions().pipe(
-    //     map((competitionsJson: ICompetitionHttp) => new GetCompetitionsSuccess(competitionsJson.competitions)),
-    //     // catchError(error => of(LoginJsonActions.loginFailed({ error }))),
-    //   ),
-    // )
-    // mergeMap(() =>
-    //   this.competitionService.getCompetitions().pipe(
-    //     map((competitionsJson: ICompetitionHttp) => {
-    //       return new GetCompetitionsSuccess(competitionsJson.competitions);
-    //     }),
-    //     // catchError(error => of(LoginJsonActions.loginFailed({ error }))),
-    //   ),
-    // )
   );
 
   constructor(

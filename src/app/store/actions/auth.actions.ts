@@ -2,30 +2,12 @@ import { Action } from '@ngrx/store';
 import { SignInData } from 'angular-token';
 
 export enum EAuthActions {
-  Login = '[Auth] Login',
-  LoginSuccess = '[Auth] Login Success',
-  LoginError = '[Auth] Login Error',
   OAuthLogin = '[Auth] OAuth Login',
   OAuthLoginSuccess = '[Auth] OAuth Login Success',
   OAuthLoginError = '[Auth] OAuth Login Error',
   Logout = '[Auth] Logout',
   LogoutSuccess = '[Auth] Logout Success',
   LogoutError = '[Auth] LogoutError',
-}
-
-export class Login implements Action {
-  public readonly type = EAuthActions.Login;
-  constructor(public payload: SignInData) {}
-}
-
-export class LoginSuccess implements Action {
-  public readonly type = EAuthActions.LoginSuccess;
-constructor(public payload: any) {}
-}
-
-export class LoginError implements Action {
-  public readonly type = EAuthActions.LoginError;
-constructor() {}
 }
 
 export class OAuthLogin implements Action {
@@ -58,6 +40,6 @@ export class LogoutError implements Action {
   constructor() {}
 }
 
-export type AuthActions = Login | LoginSuccess | LoginError |
+export type AuthActions =
   OAuthLogin | OAuthLoginSuccess | OAuthLoginError |
   Logout | LogoutSuccess | LogoutError;

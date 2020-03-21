@@ -9,9 +9,6 @@ import { IAppState } from '../state/app.state';
 
 import {
   EAuthActions,
-  Login,
-  LoginSuccess,
-  LoginError,
   OAuthLogin,
   OAuthLoginSuccess,
   OAuthLoginError,
@@ -27,25 +24,12 @@ import { selectCompetitionList } from '../selectors/competition.selectors';
 export class AuthEffects {
 
   @Effect()
-  login$ = this.actions$.pipe(
-    ofType<Login>(EAuthActions.Login),
-    mergeMap((loginAction) =>
-      this.angularTokenService.signIn(loginAction.payload).pipe(
-        map(response => new LoginSuccess(response)),
-        tap(() => this.router.navigateByUrl(localStorage.getItem('redirectTo'))),
-        catchError(error => of (new LoginError()))
-      )
-    )
-  );
-
-  @Effect()
   oauthLogin$ = this.actions$.pipe(
     ofType<OAuthLogin>(EAuthActions.OAuthLogin),
     mergeMap((oauthLoginAction) =>
       this.angularTokenService.signInOAuth('google_oauth2').pipe(
         map(response => console.log(response)),
-        // catchError(error => of (console.log(error)))
-        catchError(error => of (new LoginError()))
+        catchError(error => of (new OAuthLoginError()))
       )
     )
   );

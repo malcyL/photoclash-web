@@ -1,48 +1,4 @@
 <div class="col-md-6">   
-  <!--
-  <mat-card>             
-    <mat-card-title>
-      <mat-icon color="primary">lock</mat-icon>
-      Sign In
-    </mat-card-title>    
-    <mat-card-subtitle>  
-      Sign into a previously registered Account 
-    </mat-card-subtitle> 
-
-    <mat-card-content>   
-      <form #signInForm="ngForm" (ngSubmit)="onSubmit()">
-        <mat-form-field fxLayout.gt-xs="row" fxLayout.xs="column"> 
-          <input         
-            matInput     
-            type="email" 
-            placeholder="Email"
-            required     
-            [(ngModel)]="signInData.login"
-            name="email">
-        </mat-form-field>
-        
-        <mat-form-field fxLayout.gt-xs="row" fxLayout.xs="column">
-          <input 
-            matInput
-            type="password"
-            placeholder="Password"
-            required     
-            [(ngModel)]="signInData.password"
-            name="password">
-        </mat-form-field>
-  
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"  
-          [disabled]="!signInForm.form.valid">Sign In</button>
-      </form>
-    </mat-card-content>  
-  </mat-card>
-
-  <br/>
-  -->
-
   <mat-card>             
     <mat-card-title>
       <mat-icon color="primary">lock</mat-icon>
@@ -53,11 +9,6 @@
     </mat-card-subtitle> 
 
     <mat-card-content>   
-      <!--
-      <button mat-raised-button color="primary" style="padding: 1rem;" (click)="googleLogin()">
-        Sign in with Google
-      </button>
-      -->
       <div class="google-btn" (click)="googleLogin()">
         <div class="google-icon-wrapper">
           <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
