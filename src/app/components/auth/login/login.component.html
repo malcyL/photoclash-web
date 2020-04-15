@@ -1,22 +1,32 @@
 <div class="col-md-6">   
-  <mat-card>             
-    <mat-card-title>
-      <mat-icon color="primary">lock</mat-icon>
-      Sign In
-    </mat-card-title>    
-    <mat-card-subtitle>  
-      Sign in using your Google Account
-    </mat-card-subtitle> 
 
-    <mat-card-content>   
-      <div class="google-btn" (click)="googleLogin()">
-        <div class="google-icon-wrapper">
-          <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+  <ng-content *ngIf="(this.spinner | async) then spinnerTemplate else loginTemplate"></ng-content>
+  <ng-template #spinnerTemplate>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+  <ng-template #loginTemplate>
+    <mat-card>             
+      <mat-card-title>
+        <mat-icon color="primary">lock</mat-icon>
+        Sign In
+      </mat-card-title>    
+      <mat-card-subtitle>  
+        Sign in using your Google Account
+      </mat-card-subtitle> 
+
+      <mat-card-content>   
+        <div class="google-btn" (click)="googleLogin()">
+          <div class="google-icon-wrapper">
+            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+          </div>
+          <p class="btn-text"><b>Sign in with google</b></p>
         </div>
-        <p class="btn-text"><b>Sign in with google</b></p>
-      </div>
 
-    </mat-card-content>  
-  </mat-card>
+      </mat-card-content>  
+    </mat-card>
+  </ng-template>
 </div>                   
 <br/>

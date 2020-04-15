@@ -10,7 +10,7 @@ export const selectCompetitionList = createSelector(
   (state: ICompetitionState) => state.competitions
 );
 
-export const selectSelectedUser = createSelector(
+export const selectSelectedCompetition = createSelector(
   selectCompetitions,
   (state: ICompetitionState) => state.selectedCompetition
 );
