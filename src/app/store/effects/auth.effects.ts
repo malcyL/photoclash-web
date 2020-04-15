@@ -1,8 +1,9 @@
+import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { IAppState } from '../state/app.state';
@@ -19,6 +20,22 @@ import {
 import { AngularTokenService } from 'angular-token';
 import { ICompetitionHttp } from '../../models/http-models/competition-http.interface';
 import { selectCompetitionList } from '../selectors/competition.selectors';
+
+import { SpinnerShow, SpinnerHide } from '../actions/spinner.actions';
+
+type showSpinnerTypes =
+  | OAuthLogin;
+
+type showSpinnerActions =
+  | EAuthActions.OAuthLogin;
+
+type hideSpinnerTypes =
+  | OAuthLoginSuccess
+  | OAuthLoginError;
+
+type hideSpinnerActions =
+  | EAuthActions.OAuthLoginSuccess
+  | EAuthActions.OAuthLoginError;
 
 @Injectable()
 export class AuthEffects {
@@ -43,6 +60,24 @@ export class AuthEffects {
         tap(() => this.router.navigate(['/login'])),
         catchError(error => of (new LogoutError()))
       )
+    )
+  );
+
+  @Effect()
+  showSpinner = this.actions$.pipe(
+    // ofType<showSpinnerTypes>(...showSpinnerActions),
+    ofType<showSpinnerTypes>(EAuthActions.OAuthLogin),
+    mergeMap((showSpinnerAction) =>
+      map(() => new SpinnerShow())
+    )
+  );
+
+  @Effect()
+  hideSpinner = this.actions$.pipe(
+    // ofType<hideSpinnerTypes>(...hideSpinnerActions),
+    ofType<hideSpinnerTypes>(EAuthActions.OAuthLoginSuccess),
+    mergeMap((hideSpinnerAction) =>
+      map(() => new SpinnerHide())
     )
   );
 
