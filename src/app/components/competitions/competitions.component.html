@@ -1,17 +1,10 @@
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <table class="table table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let competition of competitions$ | async"
-        (click)="navigateToCompetition(competition.id)">
-        <td>{{ competition.id }}</td>
-        <td>{{ competition.title }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <mat-list role="list">
+    <div mat-subheader>Competitions</div>
+    <mat-list-item *ngFor="let competition of competitions$ | async">
+      <mat-icon mat-list-icon>add_a_photo</mat-icon>
+      <div mat-line> {{ competition.title}} </div>
+      <div mat-line> Status - Accepting Entries </div>
+    </mat-list-item>
+  </mat-list>
 <div>
