@@ -15,6 +15,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 // Angular Material Imports
 import { MatButtonModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material';
@@ -43,12 +44,13 @@ import { OauthCallbackComponent } from './components/auth/oauth-callback/oauth-c
 // Competitions Imports
 import { CompetitionEffects } from './store/effects/competition.effects';
 import { CompetitionService } from './services/competition.service';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CompetitionsComponent, AddCompetitionDialogComponent } from './components/competitions/competitions.component';
 
 import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component';
 
 @NgModule({
   declarations: [
+    AddCompetitionDialogComponent,
     AppComponent,
     AuthComponent,
     CompetitionsComponent,
@@ -75,6 +77,7 @@ import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -87,6 +90,7 @@ import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
+  entryComponents: [AddCompetitionDialogComponent],
   providers: [AngularTokenModule, CompetitionService],
   bootstrap: [AppComponent]
 })
