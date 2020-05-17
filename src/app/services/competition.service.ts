@@ -14,4 +14,12 @@ export class CompetitionService {
   getCompetitions(): Observable<ICompetitionHttp> {
     return this.http.get<ICompetitionHttp>(this.competitonsUrl);
   }
+
+  // createCompetition(name): string {
+  //   console.log('Competiton Service: create ' + name);
+  //   return 'bob';
+  // }
+  createCompetition(name): Observable<ICompetitionHttp> {
+    return this.http.get<ICompetitionHttp>(this.competitonsUrl);
+  }
 }
