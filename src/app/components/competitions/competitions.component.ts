@@ -14,26 +14,6 @@ import { ICompetition } from './../../models/competition.interface';
 })
 export class CompetitionsComponent implements OnInit {
 
-  FabOptions = {
-    buttons: [
-      {
-        icon: 'timeline'
-      },
-      {
-        icon: 'view_headline'
-      },
-      {
-        icon: 'room'
-      },
-      {
-        icon: 'lightbulb_outline'
-      },
-      {
-        icon: 'lock'
-      }
-    ]
-  };
-
   competitions$ = this.store.pipe(select(selectCompetitionList));
 
   @Output()
@@ -47,5 +27,9 @@ export class CompetitionsComponent implements OnInit {
 
   navigateToCompetition(id: string) {
     this.router.navigate(['competition', id]);
+  }
+
+  onAddFabClick() {
+    console.log("AddFab");
   }
 }
