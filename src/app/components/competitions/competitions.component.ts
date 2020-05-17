@@ -1,6 +1,8 @@
-import { GetCompetitions } from './../../store/actions/competition.actions';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { GetCompetitions, CreateCompetition } from './../../store/actions/competition.actions';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { IAppState } from '../../store/state/app.state';
 import { selectCompetitionList } from '../../store/selectors/competition.selectors';
@@ -19,7 +21,7 @@ export class CompetitionsComponent implements OnInit {
   @Output()
   competitionSelected: EventEmitter<string> = new EventEmitter();
 
-  constructor(private store: Store<IAppState>, private router: Router) {}
+  constructor(public dialog: MatDialog, private store: Store<IAppState>, private router: Router) {}
 
   ngOnInit() {
     this.store.dispatch(new GetCompetitions());
@@ -27,5 +29,37 @@ export class CompetitionsComponent implements OnInit {
 
   navigateToCompetition(id: string) {
     this.router.navigate(['competition', id]);
+  }
+
+  opanAddDialog() {
+    console.log('AddFab');
+    const dialogRef = this.dialog.open(AddCompetitionDialogComponent, {
+      width: '250px',
+      data: {name: ''}
+    });
+
+    dialogRef.afterClosed().subscribe(name => {
+      this.store.dispatch(new CreateCompetition(name));
+    });
+
+  }
+}
+
+export interface DialogData {
+  name: string;
+}
+
+@Component({
+  selector: 'app-add-competition-dialog',
+  templateUrl: './add-competition-dialog.html',
+})
+export class AddCompetitionDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<AddCompetitionDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onCancel(): void {
+    this.dialogRef.close();
   }
 }

@@ -14,4 +14,9 @@ export class CompetitionService {
   getCompetitions(): Observable<ICompetitionHttp> {
     return this.http.get<ICompetitionHttp>(this.competitonsUrl);
   }
+
+  createCompetition(title): Observable<ICompetitionHttp> {
+    const body = { title };
+    return this.http.post<any>(this.competitonsUrl, body);
+  }
 }
