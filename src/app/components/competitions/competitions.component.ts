@@ -1,4 +1,4 @@
-import { GetCompetitions } from './../../store/actions/competition.actions';
+import { GetCompetitions, CreateCompetition } from './../../store/actions/competition.actions';
 import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
@@ -39,6 +39,7 @@ export class CompetitionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(name => {
+      this.store.dispatch(new CreateCompetition(name));
     });
 
   }
@@ -61,5 +62,4 @@ export class AddCompetitionDialogComponent {
   onCancel(): void {
     this.dialogRef.close();
   }
-
 }
