@@ -45,6 +45,7 @@ import { CompetitionEffects } from './store/effects/competition.effects';
 import { CompetitionService } from './services/competition.service';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 
+import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
     CompetitionsComponent,
     LoginComponent,
     LogoutMenuButtonComponent,
-    OauthCallbackComponent
+    OauthCallbackComponent,
+    SpeedDialFabComponent
   ],
   imports: [
     AppRoutingModule,
