@@ -9,14 +9,18 @@ import { selectCompetitionList } from '../../store/selectors/competition.selecto
 import { Router } from '@angular/router';
 import { ICompetition } from './../../models/competition.interface';
 
+import { competitionAddFabAnimations } from './competitions.animations';
+
 @Component({
   selector: 'app-competitions',
   templateUrl: './competitions.component.html',
-  styleUrls: ['./competitions.component.css']
+  styleUrls: ['./competitions.component.css'],
+  animations: competitionAddFabAnimations
 })
 export class CompetitionsComponent implements OnInit {
 
   competitions$ = this.store.pipe(select(selectCompetitionList));
+  addCompetitionFabTogglerState = 'inactive';
 
   @Output()
   competitionSelected: EventEmitter<string> = new EventEmitter();
@@ -32,12 +36,14 @@ export class CompetitionsComponent implements OnInit {
   }
 
   opanAddDialog() {
+    this.addCompetitionFabTogglerState = 'active';
     const dialogRef = this.dialog.open(AddCompetitionDialogComponent, {
       width: '250px',
       data: {name: ''}
     });
 
     dialogRef.afterClosed().subscribe(name => {
+      this.addCompetitionFabTogglerState = 'inactive';
       // It would be better if this dialog used a Reactive Form
       // However, it's just a quick dialog from a simple dialog example.
       // There is no form validation yet. This guard just adds
