@@ -32,14 +32,20 @@ export class CompetitionsComponent implements OnInit {
   }
 
   opanAddDialog() {
-    console.log('AddFab');
     const dialogRef = this.dialog.open(AddCompetitionDialogComponent, {
       width: '250px',
       data: {name: ''}
     });
 
     dialogRef.afterClosed().subscribe(name => {
-      this.store.dispatch(new CreateCompetition(name));
+      // It would be better if this dialog used a Reactive Form
+      // However, it's just a quick dialog from a simple dialog example.
+      // There is no form validation yet. This guard just adds
+      // the most basic of check - that name is not null, which is
+      // what happens if return is pressed.
+      if (name) {
+        this.store.dispatch(new CreateCompetition(name));
+      }
     });
 
   }
@@ -53,11 +59,19 @@ export interface DialogData {
   selector: 'app-add-competition-dialog',
   templateUrl: './add-competition-dialog.html',
 })
-export class AddCompetitionDialogComponent {
+export class AddCompetitionDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddCompetitionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  ngOnInit() {
+    this.dialogRef.keydownEvents().subscribe(event => {
+        if (event.key === 'Enter') {
+            this.dialogRef.close(this.data.name);
+        }
+    });
+}
 
   onCancel(): void {
     this.dialogRef.close();
