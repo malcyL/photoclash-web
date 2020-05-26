@@ -2,18 +2,23 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { concatMap, switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { concatMap, switchMap, map, mergeMap, withLatestFrom, catchError } from 'rxjs/operators';
 
 import { IAppState } from '../state/app.state';
 
 import { ESpinnerActions, SpinnerHide } from '../actions/spinner.actions';
+import { ESnackbarActions, SnackbarShow } from '../actions/snackbar.actions';
 
 import {
-  GetCompetitionsSuccess,
   ECompetitionActions,
-  GetCompetitionSuccess,
-  GetCompetitions,
+
   GetCompetition,
+  GetCompetitionSuccess,
+
+  GetCompetitions,
+  GetCompetitionsSuccess,
+  GetCompetitionsError,
+
   CreateCompetition,
   CreateCompetitionSuccess,
 } from '../actions/competition.actions';
@@ -44,7 +49,10 @@ export class CompetitionEffects {
   getCompetitions$ = this.actions$.pipe(
     ofType<GetCompetitions>(ECompetitionActions.GetCompetitions),
     switchMap(() => this.competitionService.getCompetitions()),
-    switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions)))
+    switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions))),
+    catchError((error) => {
+        return of (new GetCompetitionsError());
+    })
   );
 
   @Effect()
@@ -54,10 +62,28 @@ export class CompetitionEffects {
   );
 
   @Effect()
+  getCompetitionsError$ = this.actions$.pipe(
+    ofType<GetCompetitionsError>(ECompetitionActions.GetCompetitionsError),
+    switchMap(() => [
+      new SnackbarShow({
+        message: 'Error retrieving competitions!',
+        action: 'Dismiss'
+      }),
+      new SpinnerHide(),
+    ]),
+  );
+
+  @Effect()
   createCompettion$ = this.actions$.pipe(
     ofType<CreateCompetition>(ECompetitionActions.CreateCompetition),
     map(action => action.payload),
-    switchMap((name) => this.competitionService.createCompetition(name)),
-    switchMap(() => of (new GetCompetitions())),
+    mergeMap((name) => this.competitionService.createCompetition(name)),
+    mergeMap(() => [
+      new SnackbarShow({
+        message: 'Competition created successfully.',
+        action: 'Dismiss'
+      }),
+      new GetCompetitions(),
+    ]),
   );
 }

@@ -5,8 +5,11 @@ import { ICompetition } from '../../models/competition.interface';
 export enum ECompetitionActions {
   GetCompetitions = '[Competition] Get Competitions',
   GetCompetitionsSuccess = '[Competition] Get Competitions Success',
+  GetCompetitionsError = '[Competition] Get Competitions Error',
+
   GetCompetition = '[Competition] Get Competition',
   GetCompetitionSuccess = '[Competition] Get Competition Success',
+
   CreateCompetition = '[Competition] Create Competition',
   CreateCompetitionSuccess = '[Competition] Create Competition Success',
 }
@@ -19,6 +22,12 @@ export class GetCompetitions implements Action {
 export class GetCompetitionsSuccess implements Action {
   public readonly type = ECompetitionActions.GetCompetitionsSuccess;
   constructor(public payload: ICompetition[]) {
+  }
+}
+
+export class GetCompetitionsError implements Action {
+  public readonly type = ECompetitionActions.GetCompetitionsError;
+  constructor() {
   }
 }
 
@@ -48,6 +57,6 @@ export class CreateCompetitionSuccess implements Action {
 }
 
 export type CompetitionActions =
-  GetCompetitions | GetCompetitionsSuccess |
+  GetCompetitions | GetCompetitionsSuccess | GetCompetitionsError |
   GetCompetition | GetCompetitionSuccess |
   CreateCompetition | CreateCompetitionSuccess;

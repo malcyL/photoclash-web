@@ -23,6 +23,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material';
 
@@ -46,6 +47,9 @@ import { OauthCallbackComponent } from './components/auth/oauth-callback/oauth-c
 import { CompetitionEffects } from './store/effects/competition.effects';
 import { CompetitionService } from './services/competition.service';
 import { CompetitionsComponent, AddCompetitionDialogComponent } from './components/competitions/competitions.component';
+
+// Snackbar Imports
+import { SnackbarEffects } from './store/effects/snackbar.effects';
 
 import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component';
 
@@ -72,7 +76,7 @@ import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component
     }),
     BrowserAnimationsModule,
     BrowserModule,
-    EffectsModule.forRoot([AuthEffects, CompetitionEffects]),
+    EffectsModule.forRoot([AuthEffects, CompetitionEffects, SnackbarEffects]),
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,
@@ -85,6 +89,7 @@ import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component
     MatListModule,
     MatMenuModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatTooltipModule,
