@@ -3,7 +3,7 @@
   <ng-content *ngIf="(this.spinner | async) then spinnerTemplate else loginTemplate"></ng-content>
   <ng-template #spinnerTemplate>
     <div class="spinner-container">
-      <mat-spinner></mat-spinner>
+      <mat-spinner color="accent"></mat-spinner>
     </div>
   </ng-template>
 
