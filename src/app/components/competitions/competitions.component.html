@@ -1,7 +1,7 @@
 <ng-content *ngIf="(this.spinner | async) then spinnerTemplate else competitionsTemplate"></ng-content>
 
 <ng-template #spinnerTemplate>
-  <div fxLayout="row" fxLayoutAlign="center center">
+  <div class="spinner-container">
     <mat-spinner></mat-spinner>
   </div>
 </ng-template>

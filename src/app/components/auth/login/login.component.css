@@ -43,3 +43,10 @@ mat-card {
 	 background: #1669f2;
 }
 
+.spinner-container {
+	position: fixed;
+	bottom: 50%;
+	right: 50%;
+	z-index: 100;
+	display: flex;
+}

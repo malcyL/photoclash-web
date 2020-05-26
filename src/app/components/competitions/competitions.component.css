@@ -27,3 +27,11 @@
   float: right;
   z-index: 100;
 }
+
+.spinner-container {
+	position: fixed;
+	bottom: 50%;
+	right: 50%;
+	z-index: 100;
+	display: flex;
+}
