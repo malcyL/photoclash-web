@@ -29,9 +29,8 @@
 }
 
 .spinner-container {
-	position: fixed;
-	bottom: 50%;
-	right: 50%;
+  justify-content: center;
 	z-index: 100;
 	display: flex;
+  margin-top:20%; 
 }
