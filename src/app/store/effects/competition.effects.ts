@@ -6,6 +6,8 @@ import { concatMap, switchMap, map, mergeMap, withLatestFrom } from 'rxjs/operat
 
 import { IAppState } from '../state/app.state';
 
+import { ESpinnerActions, SpinnerHide } from '../actions/spinner.actions';
+
 import {
   GetCompetitionsSuccess,
   ECompetitionActions,
@@ -43,6 +45,12 @@ export class CompetitionEffects {
     ofType<GetCompetitions>(ECompetitionActions.GetCompetitions),
     switchMap(() => this.competitionService.getCompetitions()),
     switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions)))
+  );
+
+  @Effect()
+  getCompetitionsSuccess$ = this.actions$.pipe(
+    ofType<GetCompetitionsSuccess>(ECompetitionActions.GetCompetitionsSuccess),
+    switchMap(() => of (new SpinnerHide()))
   );
 
   @Effect()

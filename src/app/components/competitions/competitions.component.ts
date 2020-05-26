@@ -1,6 +1,7 @@
 import { GetCompetitions, CreateCompetition } from './../../store/actions/competition.actions';
 import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -8,6 +9,8 @@ import { IAppState } from '../../store/state/app.state';
 import { selectCompetitionList } from '../../store/selectors/competition.selectors';
 import { Router } from '@angular/router';
 import { ICompetition } from './../../models/competition.interface';
+import { isSpinnerShowing } from './../../store/selectors/spinner.selectors';
+import { SpinnerShow } from './../../store/actions/spinner.actions';
 
 import { competitionAddFabAnimations } from './competitions.animations';
 
@@ -21,6 +24,7 @@ export class CompetitionsComponent implements OnInit {
 
   competitions$ = this.store.pipe(select(selectCompetitionList));
   addCompetitionFabTogglerState = 'inactive';
+  spinner: Observable<boolean>;
 
   @Output()
   competitionSelected: EventEmitter<string> = new EventEmitter();
@@ -28,6 +32,8 @@ export class CompetitionsComponent implements OnInit {
   constructor(public dialog: MatDialog, private store: Store<IAppState>, private router: Router) {}
 
   ngOnInit() {
+    this.spinner = this.store.pipe(select(isSpinnerShowing));
+    this.store.dispatch(new SpinnerShow());
     this.store.dispatch(new GetCompetitions());
   }
 

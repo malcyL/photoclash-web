@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { NgForm } from '@angular/forms';
-// import { SignInData } from 'angular-token';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
