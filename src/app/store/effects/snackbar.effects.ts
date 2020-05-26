@@ -17,25 +17,6 @@ export class SnackbarEffects {
               private matSnackBar: MatSnackBar) {
   }
 
-  // @Effect()
-  // getCompetition$ = this.actions$.pipe(
-  //   ofType<GetCompetition>(ECompetitionActions.GetCompetition),
-  //   map(action => action.payload),
-  //   withLatestFrom(this.store.pipe(select(selectCompetitionList))),
-  //   switchMap(([id, competitions]) => {
-  //     const selectedCompetition = competitions.filter(competition => competition.id === id)[0];
-  //     return of(new GetCompetitionSuccess(selectedCompetition));
-  //   })
-  // );
-
-  // @Effect({
-  //   dispatch: false
-  // })
-  // closeSnackbar: Observable<any> = this.actions.ofType(ESnackbarActions.SnackbarHide)
-  //   .pipe(
-  //     tap(() => this.matSnackBar.dismiss())
-  //   );
-
   @Effect({
     dispatch: false
   })
@@ -55,14 +36,4 @@ export class SnackbarEffects {
     delay(2000),
     map(() => new SnackbarHide())
   );
-
-  // @Effect()
-  // showSnackbar: Observable<any> = this.actions.ofType<SnackbarShow>(ESnackbarActions.SnackbarShow)
-  //   .pipe(
-  //     map((action: SnackbarShow) => action.payload),
-  //     tap(payload => this.matSnackBar.open(payload.message, payload.action, payload.config)),
-  //     delay(2000),
-  //     map(() => new SnackbarHide())
-  //   );
-
 }
