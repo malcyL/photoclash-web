@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -90,6 +91,7 @@ import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component
     MatMenuModule,
     MatSidenavModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatTooltipModule,

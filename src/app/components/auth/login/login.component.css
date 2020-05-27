@@ -49,3 +49,10 @@ mat-card {
 	display: flex;
   margin-top:20%; 
 }
+
+.btn-spacer {
+  width: 184px;
+  height: 42px;
+  background-color: #eee;
+  border-radius: 2px;
+}
