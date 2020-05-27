@@ -21,6 +21,7 @@ import {
 
   CreateCompetition,
   CreateCompetitionSuccess,
+  CreateCompetitionError,
 } from '../actions/competition.actions';
 import { CompetitionService } from '../../services/competition.service';
 import { ICompetitionHttp } from '../../models/http-models/competition-http.interface';
@@ -34,6 +35,8 @@ export class CompetitionEffects {
     private store: Store<IAppState>
   ) {}
 
+  // Get Competition
+
   @Effect()
   getCompetition$ = this.actions$.pipe(
     ofType<GetCompetition>(ECompetitionActions.GetCompetition),
@@ -44,6 +47,8 @@ export class CompetitionEffects {
       return of(new GetCompetitionSuccess(selectedCompetition));
     })
   );
+
+  // Get Competitions
 
   @Effect()
   getCompetitions$ = this.actions$.pipe(
@@ -73,11 +78,22 @@ export class CompetitionEffects {
     ]),
   );
 
+  // Create Competition
+
   @Effect()
   createCompettion$ = this.actions$.pipe(
     ofType<CreateCompetition>(ECompetitionActions.CreateCompetition),
     map(action => action.payload),
-    mergeMap((name) => this.competitionService.createCompetition(name)),
+    switchMap((name) => this.competitionService.createCompetition(name)),
+    switchMap(() => of (new CreateCompetitionSuccess())),
+    catchError((error) => {
+        return of (new CreateCompetitionError());
+    })
+  );
+
+  @Effect()
+  createCompetitionSuccess$ = this.actions$.pipe(
+    ofType<CreateCompetitionSuccess>(ECompetitionActions.CreateCompetitionSuccess),
     mergeMap(() => [
       new SnackbarShow({
         message: 'Competition created successfully.',
@@ -86,4 +102,16 @@ export class CompetitionEffects {
       new GetCompetitions(),
     ]),
   );
+
+  @Effect()
+  createCompetitionError$ = this.actions$.pipe(
+    ofType<CreateCompetitionError>(ECompetitionActions.CreateCompetitionError),
+    switchMap(() => [
+      new SnackbarShow({
+        message: 'Error creating competition!',
+        action: 'Dismiss'
+      }),
+    ]),
+  );
+
 }
