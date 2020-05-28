@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { ICompetitionHttp } from '../models/http-models/competition-http.interface';
+import { ICompetitionHttp, ICompetitionListHttp } from '../models/http-models/competition-http.interface';
 
 @Injectable()
 export class CompetitionService {
@@ -11,11 +11,15 @@ export class CompetitionService {
 
   constructor(private http: HttpClient) { }
 
-  getCompetitions(): Observable<ICompetitionHttp> {
-    return this.http.get<ICompetitionHttp>(this.competitonsUrl);
+  getCompetition(id): Observable<ICompetitionHttp> {
+    return this.http.get<ICompetitionHttp>(`${this.competitonsUrl}/${id}`);
   }
 
-  createCompetition(title): Observable<ICompetitionHttp> {
+  getCompetitions(): Observable<ICompetitionListHttp> {
+    return this.http.get<ICompetitionListHttp>(this.competitonsUrl);
+  }
+
+  createCompetition(title): Observable<ICompetitionListHttp> {
     const body = { title };
     return this.http.post<any>(this.competitonsUrl, body);
   }

@@ -1,0 +1,28 @@
+<ng-content *ngIf="(this.spinner | async) then spinnerTemplate else competitionTemplate"></ng-content>
+
+<ng-template #spinnerTemplate>
+  <div class="spinner-container">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #competitionTemplate>
+  <mat-toolbar>
+  	<span class="fill-space"></span>
+  	<span class="toolbar-title">{{ (competition$ | async).title }}</span>
+  	<span class="fill-space"></span>
+  	<button mat-icon-button (click)="delete()">
+  		<mat-icon>delete</mat-icon>
+		</button>
+  </mat-toolbar>
+
+  <div class="container">
+  	<div class="item">
+  	</div>
+  	<div class="item-center">
+  		<app-entries></app-entries>
+  	</div>
+  	<div class="item">
+  	</div>
+  </div>
+</ng-template>

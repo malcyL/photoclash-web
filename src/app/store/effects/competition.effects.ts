@@ -14,6 +14,7 @@ import {
 
   GetCompetition,
   GetCompetitionSuccess,
+  GetCompetitionError,
 
   GetCompetitions,
   GetCompetitionsSuccess,
@@ -24,7 +25,8 @@ import {
   CreateCompetitionError,
 } from '../actions/competition.actions';
 import { CompetitionService } from '../../services/competition.service';
-import { ICompetitionHttp } from '../../models/http-models/competition-http.interface';
+import { ICompetition } from '../../models/competition.interface';
+import { ICompetitionHttp, ICompetitionListHttp } from '../../models/http-models/competition-http.interface';
 import { selectCompetitionList } from '../selectors/competition.selectors';
 
 @Injectable()
@@ -41,11 +43,29 @@ export class CompetitionEffects {
   getCompetition$ = this.actions$.pipe(
     ofType<GetCompetition>(ECompetitionActions.GetCompetition),
     map(action => action.payload),
-    withLatestFrom(this.store.pipe(select(selectCompetitionList))),
-    switchMap(([id, competitions]) => {
-      const selectedCompetition = competitions.filter(competition => competition.id === id)[0];
-      return of(new GetCompetitionSuccess(selectedCompetition));
+    switchMap((id) => this.competitionService.getCompetition(id)),
+    switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionSuccess(competitionHttp))),
+    catchError((error) => {
+        return of (new GetCompetitionError());
     })
+  );
+
+  @Effect()
+  getCompetitionSuccess$ = this.actions$.pipe(
+    ofType<GetCompetitionSuccess>(ECompetitionActions.GetCompetitionSuccess),
+    switchMap(() => of (new SpinnerHide()))
+  );
+
+  @Effect()
+  getCompetitionError$ = this.actions$.pipe(
+    ofType<GetCompetitionError>(ECompetitionActions.GetCompetitionError),
+    switchMap(() => [
+      new SnackbarShow({
+        message: 'Error retrieving competition!',
+        action: 'Dismiss'
+      }),
+      new SpinnerHide(),
+    ]),
   );
 
   // Get Competitions
@@ -54,7 +74,7 @@ export class CompetitionEffects {
   getCompetitions$ = this.actions$.pipe(
     ofType<GetCompetitions>(ECompetitionActions.GetCompetitions),
     switchMap(() => this.competitionService.getCompetitions()),
-    switchMap((competitionHttp: ICompetitionHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions))),
+    switchMap((competitionHttp: ICompetitionListHttp) => of (new GetCompetitionsSuccess(competitionHttp.competitions))),
     catchError((error) => {
         return of (new GetCompetitionsError());
     })

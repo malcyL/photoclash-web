@@ -17,7 +17,7 @@ import {
   LogoutError,
 } from '../actions/auth.actions';
 import { AngularTokenService } from 'angular-token';
-import { ICompetitionHttp } from '../../models/http-models/competition-http.interface';
+import { ICompetitionListHttp } from '../../models/http-models/competition-http.interface';
 import { selectCompetitionList } from '../selectors/competition.selectors';
 
 @Injectable()

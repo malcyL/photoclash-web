@@ -53,6 +53,8 @@ import { CompetitionsComponent, AddCompetitionDialogComponent } from './componen
 import { SnackbarEffects } from './store/effects/snackbar.effects';
 
 import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component';
+import { CompetitionComponent } from './components/competition/competition.component';
+import { EntriesComponent } from './components/entries/entries.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component
     LoginComponent,
     LogoutMenuButtonComponent,
     OauthCallbackComponent,
-    SpeedDialFabComponent
+    SpeedDialFabComponent,
+    CompetitionComponent,
+    EntriesComponent
   ],
   imports: [
     AppRoutingModule,

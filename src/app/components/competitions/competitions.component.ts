@@ -38,7 +38,7 @@ export class CompetitionsComponent implements OnInit {
   }
 
   navigateToCompetition(id: string) {
-    this.router.navigate(['competition', id]);
+    this.router.navigate(['competitions', id]);
   }
 
   opanAddDialog() {

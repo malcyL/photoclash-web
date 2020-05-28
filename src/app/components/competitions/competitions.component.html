@@ -1,26 +1,34 @@
-<ng-content *ngIf="(this.spinner | async) then spinnerTemplate else competitionsTemplate"></ng-content>
-
-<ng-template #spinnerTemplate>
-  <div class="spinner-container">
-    <mat-spinner color="accent"></mat-spinner>
+<div class="container">
+  <div class="item">
   </div>
-</ng-template>
+  <div class="item-center">
+    <ng-content *ngIf="(this.spinner | async) then spinnerTemplate else competitionsTemplate"></ng-content>
 
-<ng-template #competitionsTemplate>
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-    <mat-list role="list">
-      <div mat-subheader>Competitions</div>
-      <mat-list-item *ngFor="let competition of competitions$ | async">
-        <mat-icon mat-list-icon>add_a_photo</mat-icon>
-        <div mat-line> {{ competition.title}} </div>
-        <div mat-line> Status - Accepting Entries </div>
-      </mat-list-item>
-    </mat-list>
-  </div>
+    <ng-template #spinnerTemplate>
+      <div class="spinner-container">
+        <mat-spinner color="accent"></mat-spinner>
+      </div>
+    </ng-template>
 
-  <div class="fab-container">
-    <button mat-fab color="accent" class="fab-add" (click)="opanAddDialog()">
-      <i class="material-icons"  [@addCompetitionFabToggler]="{value: addCompetitionFabTogglerState}">add</i>
-    </button>
+    <ng-template #competitionsTemplate>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <mat-action-list role="list">
+          <div mat-subheader>Competitions</div>
+          <mat-list-item *ngFor="let competition of competitions$ | async" (click)="navigateToCompetition(competition.id)">
+            <mat-icon mat-list-icon>add_a_photo</mat-icon>
+            <div mat-line> {{ competition.title}} </div>
+            <div mat-line> Status - Accepting Entries </div>
+          </mat-list-item>
+        </mat-action-list>
+      </div>
+
+      <div class="fab-container">
+        <button mat-fab color="accent" class="fab-add" (click)="opanAddDialog()">
+          <i class="material-icons"  [@addCompetitionFabToggler]="{value: addCompetitionFabTogglerState}">add</i>
+        </button>
+      </div>
+    </ng-template>
   </div>
-</ng-template>
+  <div class="item">
+  </div>
+</div>

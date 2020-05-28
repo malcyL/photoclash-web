@@ -1,0 +1,6 @@
+.spinner-container {
+  justify-content: center;
+	z-index: 100;
+	display: flex;
+  margin-top:20%; 
+}

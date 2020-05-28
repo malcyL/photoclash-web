@@ -13,6 +13,7 @@ export function competitionReducers(
         competitions: action.payload
       };
     }
+
     case ECompetitionActions.GetCompetitionSuccess: {
       return {
         ...state,

@@ -9,6 +9,7 @@ export enum ECompetitionActions {
 
   GetCompetition = '[Competition] Get Competition',
   GetCompetitionSuccess = '[Competition] Get Competition Success',
+  GetCompetitionError = '[Competition] Get Competition Error',
 
   CreateCompetition = '[Competition] Create Competition',
   CreateCompetitionSuccess = '[Competition] Create Competition Success',
@@ -38,12 +39,19 @@ export class GetCompetitionsError implements Action {
 
 export class GetCompetition implements Action {
   public readonly type = ECompetitionActions.GetCompetition;
-  public payload: any;
+  constructor(public payload: string) {
+  }
 }
 
 export class GetCompetitionSuccess implements Action {
   public readonly type = ECompetitionActions.GetCompetitionSuccess;
   constructor(public payload: ICompetition) {
+  }
+}
+
+export class GetCompetitionError implements Action {
+  public readonly type = ECompetitionActions.GetCompetitionError;
+  constructor() {
   }
 }
 

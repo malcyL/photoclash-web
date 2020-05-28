@@ -30,7 +30,6 @@ export class SnackbarEffects {
     ofType<SnackbarShow>(ESnackbarActions.SnackbarShow),
     map((action: SnackbarShow) => action.payload),
     tap(payload => {
-      console.log('===HERE=======');
       this.matSnackBar.open(payload.message, payload.action, payload.config);
     }),
     delay(2000),
