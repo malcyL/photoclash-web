@@ -52,7 +52,6 @@ import { CompetitionsComponent, AddCompetitionDialogComponent } from './componen
 // Snackbar Imports
 import { SnackbarEffects } from './store/effects/snackbar.effects';
 
-import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component';
 import { CompetitionComponent } from './components/competition/competition.component';
 import { EntriesComponent } from './components/entries/entries.component';
 
@@ -65,7 +64,6 @@ import { EntriesComponent } from './components/entries/entries.component';
     LoginComponent,
     LogoutMenuButtonComponent,
     OauthCallbackComponent,
-    SpeedDialFabComponent,
     CompetitionComponent,
     EntriesComponent
   ],
