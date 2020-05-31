@@ -14,6 +14,10 @@ export enum ECompetitionActions {
   CreateCompetition = '[Competition] Create Competition',
   CreateCompetitionSuccess = '[Competition] Create Competition Success',
   CreateCompetitionError = '[Competition] Create Competition Error',
+
+  DeleteCompetition = '[Competition] Delete Competition',
+  DeleteCompetitionSuccess = '[Competition] Delete Competition Success',
+  DeleteCompetitionError = '[Competition] Delete Competition Error',
 }
 
 // Get Competitions
@@ -75,7 +79,28 @@ export class CreateCompetitionError implements Action {
   }
 }
 
+// Delete Competition
+
+export class DeleteCompetition implements Action {
+  public readonly type = ECompetitionActions.DeleteCompetition;
+  constructor(public payload: string) {
+  }
+}
+
+export class DeleteCompetitionSuccess implements Action {
+  public readonly type = ECompetitionActions.DeleteCompetitionSuccess;
+  constructor() {
+  }
+}
+
+export class DeleteCompetitionError implements Action {
+  public readonly type = ECompetitionActions.DeleteCompetitionError;
+  constructor() {
+  }
+}
+
 export type CompetitionActions =
   GetCompetition | GetCompetitionSuccess |
   GetCompetitions | GetCompetitionsSuccess | GetCompetitionsError |
+  DeleteCompetition | DeleteCompetitionSuccess | DeleteCompetitionError |
   CreateCompetition | CreateCompetitionSuccess | CreateCompetitionError;

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { concatMap, switchMap, map, mergeMap, withLatestFrom, catchError } from 'rxjs/operators';
+import { concatMap, switchMap, map, mergeMap, withLatestFrom, catchError, tap } from 'rxjs/operators';
 
 import { IAppState } from '../state/app.state';
 
@@ -23,6 +24,10 @@ import {
   CreateCompetition,
   CreateCompetitionSuccess,
   CreateCompetitionError,
+
+  DeleteCompetition,
+  DeleteCompetitionSuccess,
+  DeleteCompetitionError,
 } from '../actions/competition.actions';
 import { CompetitionService } from '../../services/competition.service';
 import { ICompetition } from '../../models/competition.interface';
@@ -34,6 +39,7 @@ export class CompetitionEffects {
   constructor(
     private competitionService: CompetitionService,
     private actions$: Actions,
+    private router: Router,
     private store: Store<IAppState>
   ) {}
 
@@ -129,6 +135,42 @@ export class CompetitionEffects {
     switchMap(() => [
       new SnackbarShow({
         message: 'Error creating competition!',
+        action: 'Dismiss'
+      }),
+    ]),
+  );
+
+  // Delete Competition
+
+  @Effect()
+  deleteCompetition$ = this.actions$.pipe(
+    ofType<DeleteCompetition>(ECompetitionActions.DeleteCompetition),
+    map(action => action.payload),
+    switchMap((id) => this.competitionService.deleteCompetition(id)),
+    switchMap(() => of (new DeleteCompetitionSuccess())),
+    catchError((error) => {
+        return of (new DeleteCompetitionError());
+    })
+  );
+
+  @Effect()
+  deleteCompetitionSuccess$ = this.actions$.pipe(
+    ofType<DeleteCompetitionSuccess>(ECompetitionActions.DeleteCompetitionSuccess),
+    switchMap(() => [
+      new SnackbarShow({
+        message: 'Competition deleted.',
+        action: 'Dismiss'
+      }),
+    ]),
+    tap(() => this.router.navigate(['competitions']))
+  );
+
+  @Effect()
+  deleteCompetitionError$ = this.actions$.pipe(
+    ofType<DeleteCompetitionError>(ECompetitionActions.DeleteCompetitionError),
+    switchMap(() => [
+      new SnackbarShow({
+        message: 'Error deleteing competition!',
         action: 'Dismiss'
       }),
     ]),

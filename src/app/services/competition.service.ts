@@ -23,4 +23,8 @@ export class CompetitionService {
     const body = { title };
     return this.http.post<any>(this.competitonsUrl, body);
   }
+
+  deleteCompetition(id): Observable<ICompetitionHttp> {
+    return this.http.delete<ICompetitionHttp>(`${this.competitonsUrl}/${id}`);
+  }
 }

@@ -7,7 +7,7 @@ import { IAppState } from '../../store/state/app.state';
 
 import { isSpinnerShowing } from './../../store/selectors/spinner.selectors';
 import { selectSelectedCompetition } from '../../store/selectors/competition.selectors';
-import { GetCompetition } from './../../store/actions/competition.actions';
+import { GetCompetition, DeleteCompetition } from './../../store/actions/competition.actions';
 import { SpinnerShow } from './../../store/actions/spinner.actions';
 
 @Component({
@@ -35,5 +35,6 @@ export class CompetitionComponent implements OnInit {
   }
 
   delete() {
+    this.store.dispatch(new DeleteCompetition(this.competitionId));
   }
 }
