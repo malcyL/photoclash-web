@@ -21,7 +21,7 @@ export class CompetitionComponent implements OnInit {
   competition$ = this.store.pipe(select(selectSelectedCompetition));
   competitionId;
 
-  constructor(private store: Store<IAppState>, private route: ActivatedRoute) { }
+  constructor(private store: Store<IAppState>, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.spinner = this.store.pipe(select(isSpinnerShowing));
@@ -30,8 +30,10 @@ export class CompetitionComponent implements OnInit {
     this.store.dispatch(new GetCompetition(this.competitionId));
   }
 
+  back() {
+    this.router.navigate(['competitions']);
+  }
+
   delete() {
-    console.log('In Delete');
-    console.log(this.competition$);
   }
 }

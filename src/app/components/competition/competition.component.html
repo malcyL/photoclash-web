@@ -8,6 +8,9 @@
 
 <ng-template #competitionTemplate>
   <mat-toolbar>
+  	<button mat-icon-button (click)="back()">
+  		<mat-icon>arrow_back_io</mat-icon>
+		</button>
   	<span class="fill-space"></span>
   	<span class="toolbar-title">{{ (competition$ | async).title }}</span>
   	<span class="fill-space"></span>
